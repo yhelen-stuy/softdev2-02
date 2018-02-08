@@ -82,13 +82,13 @@ var clear = function() {
 var stopFrame = function(frame) {
     if (frame > -1) {
         window.cancelAnimationFrame(frame);
+        reset();
     }
-    reset();
 }
 
 var stopCanvas = function(e) {
-    stopFrame(a);
     stopFrame(b);
+    stopFrame(a);
     reset();
 }
 

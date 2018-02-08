@@ -50,8 +50,22 @@ var animateDVD = function(e) {
     } else if (y < r) {
         yChange = Math.floor(Math.random() * (MAX_CHANGE)) + 1;
     }
-    console.log(xChange + "," + yChange);
     a = window.requestAnimationFrame(animateDVD);
+}
+
+var animateFun = function(e) {
+    if (a > -1) {
+        stopFrame(a);
+    }
+    clear();
+    if (x == null || y == null) {
+        x = Math.floor(Math.random() * w);
+        y = Math.floor(Math.random() * h);
+    }
+    drawCircle(x, y);
+    x = (x + 2) % w;
+    y = (y + 2) % h;
+    b = window.requestAnimationFrame(animateFun);
 }
 
 var reset = function() {
@@ -66,7 +80,9 @@ var clear = function() {
 }
 
 var stopFrame = function(frame) {
-    window.cancelAnimationFrame(frame);
+    if (frame > -1) {
+        window.cancelAnimationFrame(frame);
+    }
     reset();
 }
 
@@ -76,5 +92,6 @@ var stopCanvas = function(e) {
     reset();
 }
 
+funB.addEventListener('click', animateFun);
 dvdB.addEventListener('click', animateDVD);
 stopB.addEventListener('click', stopCanvas);

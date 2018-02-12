@@ -12,7 +12,7 @@ var x = null;
 var y = null;
 var xChange = 1;
 var yChange = 2;
-var MAX_CHANGE = 4;
+var MAX_CHANGE = 2;
 
 var pi = Math.PI;
 
@@ -29,6 +29,7 @@ var drawCircle = function(cx, cy) {
 }
 
 var animateDVD = function(e) {
+    window.cancelAnimationFrame(a);
     if (b > -1) {
         stopFrame(b);
     }
@@ -37,23 +38,28 @@ var animateDVD = function(e) {
         x = w / 2;
         y = h / 2;
     }
-    drawCircle(x, y);
+    var logo = new Image();
+    logo.src = 'DVD.png';
+    var logo_w = 90;
+    var logo_h = 42;
+    ctx.drawImage(logo, x, y, logo_w, logo_h)
     x += xChange;
     y += yChange;
-    if (x > w - r) {
+    if (x > w - logo_w/2) {
         xChange = Math.floor(Math.random() * MAX_CHANGE) * -1;
-    } else if (x < r) {
+    } else if (x < logo_w/2) {
         xChange = Math.floor(Math.random() * (MAX_CHANGE)) + 1;
     }
-    if (y > h - r) {
+    if (y > h - logo_h/2) {
         yChange = Math.floor(Math.random() * MAX_CHANGE) * -1;
-    } else if (y < r) {
+    } else if (y < logo_h/2) {
         yChange = Math.floor(Math.random() * (MAX_CHANGE)) + 1;
     }
     a = window.requestAnimationFrame(animateDVD);
 }
 
 var animateFun = function(e) {
+    window.cancelAnimationFrame(b);
     if (a > -1) {
         stopFrame(a);
     }
